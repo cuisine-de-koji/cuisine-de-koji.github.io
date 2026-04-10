@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>formrun Test Page</title>
+    <script src="https://sdk.form.run/js/v2/formrun.js"></script>
+    <style>
+      :root {
+        --bg: #f5f1e8;
+        --card: #fffdf8;
+        --text: #2c241d;
+        --muted: #6d6257;
+        --line: #ded4c8;
+        --accent: #b4552d;
+        --accent-dark: #8a3f20;
+        --error: #b42318;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, #fff7ec 0, transparent 32%),
+          linear-gradient(180deg, #f8f4ec 0%, var(--bg) 100%);
+      }
+
+      .wrap {
+        width: min(760px, calc(100% - 32px));
+        margin: 48px auto 72px;
+      }
+
+      .hero,
+      .card {
+        background: rgba(255, 253, 248, 0.94);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: 0 18px 50px rgba(44, 36, 29, 0.08);
+      }
+
+      .hero {
+        padding: 28px;
+        margin-bottom: 20px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f1dfd4;
+        color: var(--accent-dark);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      h1 {
+        margin: 16px 0 10px;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.15;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      code {
+        padding: 0.15em 0.4em;
+        border-radius: 6px;
+        background: #f3ebe0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.95em;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .card {
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+
+      .steps {
+        margin: 0;
+        padding-left: 1.2em;
+      }
+
+      .steps li + li {
+        margin-top: 8px;
+      }
+
+      .urlBox {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: #f8f1e7;
+        border: 1px dashed #cfbdaa;
+        word-break: break-all;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 14px;
+      }
+
+      form {
+        display: grid;
+        gap: 18px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      label {
+        font-weight: 700;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid #cdbfb0;
+        background: #fff;
+        color: var(--text);
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+
+      .check {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .check input {
+        margin-top: 3px;
+      }
+
+      .error {
+        display: none;
+        color: var(--error);
+        font-size: 14px;
+      }
+
+      [data-formrun-show-if-error] {
+        display: none;
+      }
+
+      .submit {
+        appearance: none;
+        border: 0;
+        border-radius: 999px;
+        padding: 14px 20px;
+        font: inherit;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+        cursor: pointer;
+      }
+
+      .submit:hover {
+        filter: brightness(1.05);
+      }
+
+      .link {
+        display: inline-block;
+        margin-top: 12px;
+        color: var(--accent-dark);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .link:hover {
+        text-decoration: underline;
+      }
+
+      ._formrun_gotcha {
+        position: absolute !important;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+      }
+
+      @media (max-width: 640px) {
+        .wrap {
+          width: min(100% - 20px, 760px);
+          margin-top: 20px;
+          margin-bottom: 40px;
+        }
+
+        .hero,
+        .card {
+          border-radius: 16px;
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <span class="eyebrow">FORMRUN TEST</span>
+        <h1>formrun のコード型フォーム検証ページ</h1>
+        <p class="muted">
+          このページは GitHub Pages 上で formrun のコード型フォームを試すための検証用ページです。
+          まずは <code>action</code> 属性の <code>YOUR_FORMRUN_ACTION_URL</code> を、
+          formrun 管理画面の「コード設置」に表示される URL に置き換えてください。
+        </p>
+        <a class="link" href="./">トップページへ戻る</a>
+      </section>
+
+      <section class="card">
+        <h2>使い方</h2>
+        <ol class="steps">
+          <li>このファイル内の <code>YOUR_FORMRUN_ACTION_URL</code> を formrun の送信先 URL に置き換える</li>
+          <li>formrun 管理画面の「フォームの埋め込み先を指定」に、このページの URL を登録する</li>
+          <li>保存後、このページからテスト送信して formrun 側に回答が入ることを確認する</li>
+        </ol>
+        <div class="urlBox" id="page-url"></div>
+      </section>
+
+      <section class="card">
+        <h2>テストフォーム</h2>
+        <form id="formrun-test-form" class="formrun" action="YOUR_FORMRUN_ACTION_URL" method="post">
+          <div class="field">
+            <label for="name">お名前</label>
+            <input id="name" name="お名前" type="text">
+          </div>
+
+          <div class="field">
+            <label for="email">メールアドレス [必須]</label>
+            <input id="email" name="メールアドレス" type="text" data-formrun-type="email" data-formrun-required>
+            <div class="error" data-formrun-show-if-error="メールアドレス">メールアドレスを正しく入力してください</div>
+          </div>
+
+          <div class="field">
+            <label for="message">お問い合わせ [必須]</label>
+            <textarea id="message" name="お問い合わせ" data-formrun-required></textarea>
+            <div class="error" data-formrun-show-if-error="お問い合わせ">お問い合わせ内容を入力してください</div>
+          </div>
+
+          <div class="field">
+            <label class="check" for="agreement">
+              <input id="agreement" type="checkbox" name="個人情報利用同意" data-formrun-required>
+              <span>個人情報の利用に同意します [必須]</span>
+            </label>
+            <div class="error" data-formrun-show-if-error="個人情報利用同意">同意してください</div>
+          </div>
+
+          <div class="_formrun_gotcha">
+            <label for="_formrun_gotcha">If you are a human, ignore this field</label>
+            <input type="text" name="_formrun_gotcha" id="_formrun_gotcha" tabindex="-1">
+          </div>
+
+          <button
+            class="submit"
+            type="submit"
+            data-formrun-error-text="未入力の項目があります"
+            data-formrun-submitting-text="送信中..."
+          >
+            送信する
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var pageUrl = document.getElementById("page-url");
+        var form = document.getElementById("formrun-test-form");
+
+        pageUrl.textContent = "このページのURL: " + window.location.href;
+
+        form.addEventListener("submit", function (event) {
+          if (form.getAttribute("action") === "YOUR_FORMRUN_ACTION_URL") {
+            event.preventDefault();
+            window.alert("まず formrun の action URL を設定してください。");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
